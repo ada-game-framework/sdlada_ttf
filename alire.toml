@@ -1,0 +1,10 @@
+name = "sdlada_ttf"
+description = "Ada 2022 bindings to SDL2_ttf."
+version = "0.1.0-dev"
+
+authors = ["Luke A. Guest"]
+maintainers = ["Luke A. Guest <laguest@archeia.com>"]
+maintainers-logins = ["Lucretia"]
+licenses = "Zlib"
+website = ""
+tags = ["sdl2", "ttf", "fonts"]

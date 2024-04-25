@@ -1,11 +1,26 @@
 with "config/sdlada_ttf_config.gpr";
-project Sdlada_Ttf is
+with "sdlada.gpr";
 
-   for Library_Name use "Sdlada_Ttf";
-   for Library_Version use Project'Library_Name & ".so." & Sdlada_Ttf_Config.Crate_Version;
+project SDLAda_TTF is
+   type Platform_Type is ("linux", "bsd", "windows", "macosx", "macos_homebrew", "macos_ports", "ios", "android");
 
-   for Source_Dirs use ("src/", "config/");
-   for Object_Dir use "obj/" & Sdlada_Ttf_Config.Build_Profile;
+   Platform : Platform_Type := external ("SDLADA_TTF_PLATFORM", "linux");
+
+   Source_Platform_Linker := "";
+
+   case Platform is
+      when "macosx" =>
+         Source_Platform_Linker := "src/link/macosx";
+
+      when others =>
+         Source_Platform_Linker := "src/link/nix";
+   end case;
+
+   for Library_Name use "sdlada_ttf";
+   for Library_Version use Project'Library_Name & ".so." & SDLAda_TTF_Config.Crate_Version;
+
+   for Source_Dirs use ("src/", Source_Platform_Linker, "config/");
+   for Object_Dir use "obj/" & SDLAda_TTF_Config.Build_Profile;
    for Create_Missing_Dirs use "True";
    for Library_Dir use "lib";
 
@@ -15,7 +30,9 @@ project Sdlada_Ttf is
    for Library_Kind use Library_Type;
 
    package Compiler is
-      for Default_Switches ("Ada") use Sdlada_Ttf_Config.Ada_Compiler_Switches;
+      for Default_Switches ("Ada") use SDLAda_TTF_Config.Ada_Compiler_Switches &
+         ("-gnat2022", "-gnata", "-gnato", "-gnatwa", "-gnaty", "-gnaty-s", "-gnatyO", "-gnatyM120", "-gnatyx",
+          "-gnatwaJ");
    end Compiler;
 
    package Binder is
@@ -25,5 +42,4 @@ project Sdlada_Ttf is
    package Install is
       for Artifacts (".") use ("share");
    end Install;
-
-end Sdlada_Ttf;
+end SDLAda_TTF;

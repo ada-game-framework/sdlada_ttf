@@ -8,3 +8,10 @@ maintainers-logins = ["Lucretia"]
 licenses = "Zlib"
 website = ""
 tags = ["sdl2", "ttf", "fonts"]
+
+[[depends-on]]
+  sdlada = "=2.5.23"
+  libsdl2_ttf = "^2.0.0"
+
+[[pins]] # TODO: Remove
+  sdlada = { path = "../sdlada" }

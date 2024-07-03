@@ -13,5 +13,5 @@ tags = ["sdl2", "ttf", "fonts"]
   sdlada = "=2.5.23"
   libsdl2_ttf = "^2.0.0"
 
-[[pins]] # TODO: Remove
-  sdlada = { path = "../sdlada" }
+#[[pins]] # TODO: Remove
+#  sdlada = { path = "../sdlada" }

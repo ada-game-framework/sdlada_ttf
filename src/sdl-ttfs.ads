@@ -25,9 +25,12 @@ package SDL.TTFs is
      Inline_Always => True;
 
    procedure Finalise with
+     Obsolescent,
      Import        => True,
      Convention    => C,
      External_Name => "TTF_Quit";
+
+   procedure Quit renames Finalise;
 
    --  Fonts.
    type Point_Sizes is new C.int;

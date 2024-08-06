@@ -13,10 +13,8 @@ package body SDL.TTFs is
         Import        => True,
         Convention    => C,
         External_Name => "TTF_Init";
-
-      Result : constant C.int := TTF_Init;
    begin
-      return (Result = Success);
+      return (TTF_Init = Success);
    end Initialise;
 
 
@@ -26,11 +24,6 @@ package body SDL.TTFs is
         Import        => True,
         Convention    => C,
         External_Name => "TTF_CloseFont";
-
-      procedure TTF_Quit with
-        Import        => True,
-        Convention    => C,
-        External_Name => "TTF_Quit";
    begin
       if Self.Internal /= null then
          if Self.Source_Freed = False then
@@ -38,8 +31,6 @@ package body SDL.TTFs is
          end if;
 
          Self.Internal := null;
-
-         TTF_Quit;
       end if;
    end Finalize;
 
@@ -109,10 +100,8 @@ package body SDL.TTFs is
         Import        => True,
         Convention    => C,
         External_Name => "TTF_GetFontKerning";
-
-      Enabled : constant C.int := TTF_Get_Font_Kerning (Self.Internal);
    begin
-      return (if Enabled = 0 then False else True);
+      return (TTF_Get_Font_Kerning (Self.Internal) = Success);
    end Kerning;
 
 
@@ -182,10 +171,8 @@ package body SDL.TTFs is
         Import        => True,
         Convention    => C,
         External_Name => "TTF_FontFaceIsFixedWidth";
-
-      Result : constant C.int := TTF_Font_Face_Is_Fixed_Width (Self.Internal);
    begin
-      return (if Result > 0 then True else False);
+      return (TTF_Font_Face_Is_Fixed_Width (Self.Internal) > Success);
    end Is_Face_Fixed_Width;
 
 

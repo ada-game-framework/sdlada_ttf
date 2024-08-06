@@ -244,7 +244,7 @@ package body SDL.TTFs is
    --  This is to get around C programmers being inconsistent. We may need more of these.
    --  The functions in SDL2_TTF use `SDL_Color fg` whereas the rest of SDL2 uses `const SDL_Color *`,
    --  The Colour record is convention C and will be passed correctly with an in parameter to C.
-   type Colour_By_Copy is new Colour with
+   type Colour_By_Copy is new Palettes.Colour with
      Convention => C_Pass_by_Copy;
 
 
@@ -253,7 +253,7 @@ package body SDL.TTFs is
                           Colour : in Palettes.Colour) return SDL.Video.Surfaces.Surface is
       function TTF_Render_Text_Solid (Font   : in Fonts_Ref;
                                       Text   : in C.char_array;
-                                      Colour : in Palettes.Colour_By_Copy)
+                                      Colour : in Colour_By_Copy)
                                       return Video.Surfaces.Internal_Surface_Pointer with
         Import        => True,
         Convention    => C,
@@ -263,7 +263,7 @@ package body SDL.TTFs is
       return Make_Surface_From_Pointer
            (S    => TTF_Render_Text_Solid (Self.Internal,
                                            C.To_C (Text),
-                                           Palettes.Colour_By_Copy (Colour)),
+                                           Colour_By_Copy (Colour)),
             Owns => True);
    end Render_Solid;
 
@@ -274,8 +274,8 @@ package body SDL.TTFs is
                            Background_Colour : in Palettes.Colour) return SDL.Video.Surfaces.Surface is
       function TTF_Render_Text_Shaded (Font              : in Fonts_Ref;
                                        Text              : in C.char_array;
-                                       Colour            : in Palettes.Colour_By_Copy;
-                                       Background_Colour : in Palettes.Colour_By_Copy)
+                                       Colour            : in Colour_By_Copy;
+                                       Background_Colour : in Colour_By_Copy)
                                        return Video.Surfaces.Internal_Surface_Pointer with
         Import        => True,
         Convention    => C,
@@ -284,8 +284,8 @@ package body SDL.TTFs is
       return Make_Surface_From_Pointer
            (S    => TTF_Render_Text_Shaded (Self.Internal,
                                             C.To_C (Text),
-                                            Palettes.Colour_By_Copy (Colour),
-                                            Palettes.Colour_By_Copy (Background_Colour)),
+                                            Colour_By_Copy (Colour),
+                                            Colour_By_Copy (Background_Colour)),
             Owns => True);
    end Render_Shaded;
 
@@ -295,7 +295,7 @@ package body SDL.TTFs is
                             Colour : in Palettes.Colour) return SDL.Video.Surfaces.Surface is
       function TTF_Render_Text_Blended (Font   : in Fonts_Ref;
                                         Text   : in C.char_array;
-                                        Colour : in Palettes.Colour_By_Copy)
+                                        Colour : in Colour_By_Copy)
                                         return Video.Surfaces.Internal_Surface_Pointer with
         Import        => True,
         Convention    => C,
@@ -304,7 +304,7 @@ package body SDL.TTFs is
       return Make_Surface_From_Pointer
            (S    => TTF_Render_Text_Blended (Self.Internal,
                                              C.To_C (Text),
-                                             Palettes.Colour_By_Copy (Colour)),
+                                             Colour_By_Copy (Colour)),
             Owns => True);
    end Render_Blended;
 
@@ -314,7 +314,7 @@ package body SDL.TTFs is
                                 Colour   : in Palettes.Colour) return SDL.Video.Surfaces.Surface is
       function TTF_Render_UTF_8_Solid (Font    : in Fonts_Ref;
                                        Text    : in C.char_array;
-                                       Colour  : in Palettes.Colour_By_Copy)
+                                       Colour  : in Colour_By_Copy)
                                        return Video.Surfaces.Internal_Surface_Pointer with
         Import        => True,
         Convention    => C,
@@ -323,7 +323,7 @@ package body SDL.TTFs is
       return Make_Surface_From_Pointer
            (S    => TTF_Render_UTF_8_Solid (Self.Internal,
                                             C.To_C (Text),
-                                            Palettes.Colour_By_Copy (Colour)),
+                                            Colour_By_Copy (Colour)),
             Owns => True);
    end Render_UTF_8_Solid;
 
@@ -334,8 +334,8 @@ package body SDL.TTFs is
                                  Background_Colour : in Palettes.Colour) return SDL.Video.Surfaces.Surface is
       function TTF_Render_UTF_8_Shaded (Font              : in Fonts_Ref;
                                         Text              : in C.char_array;
-                                        Colour            : in Palettes.Colour_By_Copy;
-                                        Background_Colour : in Palettes.Colour_By_Copy)
+                                        Colour            : in Colour_By_Copy;
+                                        Background_Colour : in Colour_By_Copy)
                                         return Video.Surfaces.Internal_Surface_Pointer with
         Import        => True,
         Convention    => C,
@@ -344,8 +344,8 @@ package body SDL.TTFs is
       return Make_Surface_From_Pointer
            (S    => TTF_Render_UTF_8_Shaded (Self.Internal,
                                              C.To_C (Text),
-                                             Palettes.Colour_By_Copy (Colour),
-                                             Palettes.Colour_By_Copy (Background_Colour)),
+                                             Colour_By_Copy (Colour),
+                                             Colour_By_Copy (Background_Colour)),
             Owns => True);
    end Render_UTF_8_Shaded;
 
@@ -355,7 +355,7 @@ package body SDL.TTFs is
                                   Colour            : in Palettes.Colour) return SDL.Video.Surfaces.Surface is
       function TTF_Render_UTF_8_Blended (Font   : in Fonts_Ref;
                                          Text   : in C.char_array;
-                                         Colour : in Palettes.Colour_By_Copy)
+                                         Colour : in Colour_By_Copy)
                                          return Video.Surfaces.Internal_Surface_Pointer with
         Import        => True,
         Convention    => C,
@@ -364,7 +364,7 @@ package body SDL.TTFs is
       return Make_Surface_From_Pointer
            (S    => TTF_Render_UTF_8_Blended (Self.Internal,
                                               C.To_C (Text),
-                                              Palettes.Colour_By_Copy (Colour)),
+                                              Colour_By_Copy (Colour)),
             Owns => True);
    end Render_UTF_8_Blended;
 end SDL.TTFs;

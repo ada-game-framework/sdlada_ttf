@@ -241,6 +241,13 @@ package body SDL.TTFs is
      Convention => Ada;
 
 
+   --  This is to get around C programmers being inconsistent. We may need more of these.
+   --  The functions in SDL2_TTF use `SDL_Color fg` whereas the rest of SDL2 uses `const SDL_Color *`,
+   --  The Colour record is convention C and will be passed correctly with an in parameter to C.
+   type Colour_By_Copy is new Colour with
+     Convention => C_Pass_by_Copy;
+
+
    function Render_Solid (Self   : in Fonts;
                           Text   : in String;
                           Colour : in Palettes.Colour) return SDL.Video.Surfaces.Surface is
